@@ -2,9 +2,7 @@ name: Merge upstream branches
 
 on:
   schedule:
-     # actually, ~5 minutes is the highest
-     # effective frequency you will get
-    - cron:  '0 */12 * * *'
+    - cron:  '0 */12 * * *' ## runs every 12 hours at 00 and 12 UTC
   push: 
     branches: [ main ]
     
