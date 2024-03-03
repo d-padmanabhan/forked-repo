@@ -1,13 +1,13 @@
-# .github/workflows/example.yml
-
 name: Merge upstream branches
+
 on:
   schedule:
      # actually, ~5 minutes is the highest
      # effective frequency you will get
-    - cron:  '* * * * *'
+    - cron:  '0 */12 * * *'
   push: 
     branches: [ main ]
+    
 jobs:
   sync-fork:
     runs-on: ubuntu-latest
@@ -26,13 +26,11 @@ jobs:
           git fetch upstream
 
           # Neither forget the -b opt,
-          # the feature/x ref is ambiguous at this stage
-          git checkout -b feature/x origin/main
+          # the sync-fork ref is ambiguous at this stage
+          git checkout -b sync-fork origin/main
           git merge --no-edit upstream/main
           git push origin main
-
           git checkout main
           git merge --no-edit upstream/main
           git push origin main
 
-          # etc
